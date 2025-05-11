@@ -1,53 +1,56 @@
-import Chart from 'chart.js/auto';
+import Chart from 'chart.js/auto'
 
-const yearsInput = document.getElementById('years');
-const capexInput = document.getElementById('capex');
-const licenseInput = document.getElementById('license');
+const yearsInput = document.getElementById('years')
+const capexInput = document.getElementById('capex')
+const licenseInput = document.getElementById('license')
+const unityColorInput = document.getElementById('color-unity')
+const baseColorInput = document.getElementById('color-base')
 
-const yearsVal = document.getElementById('years-val');
-const capexVal = document.getElementById('capex-val');
-const licenseVal = document.getElementById('license-val');
+const yearsVal = document.getElementById('years-val')
+const capexVal = document.getElementById('capex-val')
+const licenseVal = document.getElementById('license-val')
 
-const chartCanvas = document.getElementById('chart');
+const chartCanvas = document.getElementById('chart')
+let chart = null
 
-let chart = null;
+function simulateYield(years, license) {
+  const panels = 194000
+  const baseYield = 500 * 1.25
+  const pricePerKWh = 0.08
+  const annualLicenseCost = panels * license
 
-function simulateYield(years, capex, license) {
-  const panels = 194000;
-  const baseYield = 500 * 1.25; // 625 kWh/year with UNITY
-  const pricePerKWh = 0.08;
-  const annualLicenseCost = panels * license;
+  let unityRevenue = []
+  let baseRevenue = []
 
-  let unityRevenue = [];
-  let baseRevenue = [];
-
-  let unityKWh = baseYield * panels;
-  let baseKWh = 500 * panels;
+  let unityKWh = baseYield * panels
+  let baseKWh = 500 * panels
 
   for (let y = 1; y <= years; y++) {
-    unityRevenue.push((unityKWh * pricePerKWh) - annualLicenseCost);
-    baseRevenue.push(baseKWh * pricePerKWh);
+    unityRevenue.push((unityKWh * pricePerKWh) - annualLicenseCost)
+    baseRevenue.push(baseKWh * pricePerKWh)
 
-    unityKWh *= 0.99;  // 1% degradation
-    baseKWh *= y === 1 ? 0.99 : 0.98;  // 1% Y1, then 2%
+    unityKWh *= 0.99
+    baseKWh *= y === 1 ? 0.99 : 0.98
   }
 
-  return { unityRevenue, baseRevenue };
+  return { unityRevenue, baseRevenue }
 }
 
 function updateChart() {
-  const years = parseInt(yearsInput.value);
-  const capex = parseFloat(capexInput.value);
-  const license = parseFloat(licenseInput.value);
+  const years = parseInt(yearsInput.value)
+  const capex = parseFloat(capexInput.value)
+  const license = parseFloat(licenseInput.value)
+  const unityColor = unityColorInput.value
+  const baseColor = baseColorInput.value
 
-  yearsVal.textContent = years;
-  capexVal.textContent = capex;
-  licenseVal.textContent = license;
+  yearsVal.textContent = years
+  capexVal.textContent = capex
+  licenseVal.textContent = license
 
-  const labels = Array.from({ length: years }, (_, i) => `Year ${i + 1}`);
-  const { unityRevenue, baseRevenue } = simulateYield(years, capex, license);
+  const labels = Array.from({ length: years }, (_, i) => `Year ${i + 1}`)
+  const { unityRevenue, baseRevenue } = simulateYield(years, license)
 
-  if (chart) chart.destroy();
+  if (chart) chart.destroy()
 
   chart = new Chart(chartCanvas, {
     type: 'bar',
@@ -57,16 +60,17 @@ function updateChart() {
         {
           label: 'With UNITY',
           data: unityRevenue.map(v => v / 1_000_000),
-          backgroundColor: 'green'
+          backgroundColor: unityColor
         },
         {
           label: 'Without UNITY',
           data: baseRevenue.map(v => v / 1_000_000),
-          backgroundColor: 'gray'
+          backgroundColor: baseColor
         }
       ]
     },
     options: {
+      responsive: true,
       scales: {
         y: {
           title: {
@@ -76,11 +80,13 @@ function updateChart() {
         }
       }
     }
-  });
+  })
 }
 
-yearsInput.oninput = updateChart;
-capexInput.oninput = updateChart;
-licenseInput.oninput = updateChart;
+yearsInput.oninput = updateChart
+capexInput.oninput = updateChart
+licenseInput.oninput = updateChart
+unityColorInput.oninput = updateChart
+baseColorInput.oninput = updateChart
 
-updateChart();
+updateChart()
