@@ -1,0 +1,23 @@
+{
+  "name": "unity-yield-sim",
+  "version": "1.0.0",
+  "description": "Interactive yield simulator for Sunified UNITY sensor-enhanced solar projects.",
+  "homepage": "https://sunified-technologies-bv.github.io/Unity-Yield-Sim",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "author": "Sunified Technologies BV",
+  "license": "MIT",
+  "dependencies": {
+    "chart.js": "^4.4.9"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "vite": "^5.4.19"
+  },
+  "main": "main.js",
+  "keywords": []
+}

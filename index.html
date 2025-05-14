@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UNITY Solar Yield Simulator</title>
   <script type="module" crossorigin src="/main.js"></script>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <div id="app">
     <h1>☀️ UNITY Solar Yield Simulator</h1>
-
     <section class="controls">
       <label>Years: <input type="range" id="years" min="5" max="10" value="7"><span id="years-val">7</span></label>
       <label>UNITY sensor CAPEX per panel ($): <input type="range" id="capex" min="1" max="10" step="0.5" value="5"><span id="capex-val">5</span></label>
       <label>UNITY license ($/panel/year): <input type="range" id="license" min="0" max="5" step="0.25" value="2.25"><span id="license-val">2.25</span></label>
-
       <label>Color: With UNITY <input type="color" id="color-unity" value="#2e8b57"></label>
       <label>Color: Without UNITY <input type="color" id="color-base" value="#888888"></label>
     </section>
-
     <canvas id="chart"></canvas>
   </div>
 </body>

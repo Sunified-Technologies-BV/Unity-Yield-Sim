@@ -1,27 +1,19 @@
 body {
-  font-family: system-ui, sans-serif;
+  font-family: sans-serif;
   margin: 2rem;
-  background: #f5f5f5;
-  color: #111;
+  background: #f4f4f4;
 }
-
-h1 {
-  margin-bottom: 1.5rem;
+#app {
+  max-width: 800px;
+  margin: auto;
 }
-
 .controls label {
   display: block;
-  margin-bottom: 1rem;
+  margin: 1em 0;
 }
-
-input[type='range'] {
-  width: 300px;
-  margin-left: 1rem;
-}
-
 canvas {
-  background: white;
-  padding: 1rem;
-  border: 1px solid #ccc;
   margin-top: 2rem;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 1rem;
 }

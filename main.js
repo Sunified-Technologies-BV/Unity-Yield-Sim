@@ -38,13 +38,12 @@ function simulateYield(years, license) {
 
 function updateChart() {
   const years = parseInt(yearsInput.value)
-  const capex = parseFloat(capexInput.value)
   const license = parseFloat(licenseInput.value)
   const unityColor = unityColorInput.value
   const baseColor = baseColorInput.value
 
   yearsVal.textContent = years
-  capexVal.textContent = capex
+  capexVal.textContent = capexInput.value
   licenseVal.textContent = license
 
   const labels = Array.from({ length: years }, (_, i) => `Year ${i + 1}`)
